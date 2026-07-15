@@ -1,35 +1,21 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import path from "path";
-import checker from "vite-plugin-checker";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
-import dns from "node:dns";
-
-dns.setDefaultResultOrder("verbatim");
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    checker({
-      typescript: true,
-    }),
-  ],
-  server: {
-    port: 3000,
-    host: true,
-    allowedHosts: true,
-  },
-  preview: {
-    port: 3000,
-    host: true,
-    allowedHosts: true,
-  },
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
-});
+  server: {
+    port: 5173,
+    strictPort: false,
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'terser',
+  },
+})
